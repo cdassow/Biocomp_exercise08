@@ -103,4 +103,4 @@ for(i in 2:length(findRuns)){
 
 # give out column names and print it
 colnames(out)=c('start','length')
-out
+print(out)
