@@ -58,6 +58,7 @@ while (guess_num != secret_num){
     cat("tries remaining")
   }
   else if (guess_num > secret_num){
+    tries = tries + 1
     cat("Lower. ")
     cat("You have")
     print(10 - tries)
