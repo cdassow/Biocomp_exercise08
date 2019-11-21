@@ -1,36 +1,53 @@
 #Plotting
 library(ggplot2)
-score<-read.table("./Biocomp_exercise08/UWvMSU_1-22-13.txt", header = TRUE, stringsAsFactors = FALSE)
-head(score)
-a=ggplot(data=score, mapping=aes(x=time, y=score))
-a+geom_line(aes(color=team))+xlab("Time (min)")+ylab("Points Scored")+
-  theme_bw()
+#load data
+game<-read.table("./Biocomp_exercise08/UWvMSU_1-22-13.txt", header = TRUE, stringsAsFactors = FALSE)
 
+#separating out the teams into two data sets
+scoreUW<-game[which(game[,2]=="UW"),]
+scoreMSU<-game[which(game[,2]=="MSU"),]
 
-scoreUW<-score[which(score[,2]=="UW"),]
-scoreMSU<-score[which(score[,2]=="MSU"),]
+#making the y variable cumulative
+scoreUW[,"points_scoredUW"]<-cumsum(scoreUW$score)
+scoreMSU[,"points_scoredMSU"]<-cumsum(scoreMSU$score)
 
-#how did i get scoreSum to do what i wanted before??
-scoreSumUW=cumsum(scoreUW[,3])
-scoreSumMSU=cumsum(scoreMSU[,3])
+#categorizing the x variable
+game[,"quarter"]<-game[,time=cut(time, breaks=c(0,10,20,30,40),labels=c("1st","2nd","3rd","4th"))]
 
-# Generate some data
-timeGame<-score$time
-plot(timeGame, scoreSumUW, type="l", pch=19, col="red", xlab="Time", ylab="Score")
-# Add a line
-lines(timeGame, scoreSumMSU, pch=18, col="green", type="l", lty=1)
-# Add a legend
-legend(1, 95, legend=c("UW", "MSU"),
-       col=c("red", "green"), lty=solid, cex=0.8)
+ggplot() + 
+  geom_line(data = scoreUW, aes(x = time, y = points_scoredUW), color = "red") +
+  geom_line(data = scoreMSU, aes(x = time, y = points_scoredMSU), color = "green") +
+  xlab('Quarter') +
+  ylab('Points Scored')+
+  theme_classic()
 
 #Guess My Number game
-n<-sample(1:100, 1, replace = TRUE)
-x<- readline(prompt = "Guess: ")
-if (x>n){
-  print("Lower")
-}else if (x<n){
-  print("Higher")
-}else{
-  print("Correct!")
+readinteger <- function()
+{ n <- readline(prompt="Guess here: ")
+  if(!grepl("^[0-9]+$",n))
+  {return(readinteger())
+  }
+  return(as.integer(n))
 }
-#get the script to go back to readline() after "lower" or "higher"
+
+num <- round(runif(1) * 100, digits = 0)
+guess <- 1
+
+cat("Guess a number between 0 and 100.\n")
+while(guess != num)
+{ 
+  guess <- readinteger()
+  if (guess == num)
+  {
+    cat("Congratulations,", num, "is right.\n")
+  }
+  else if (guess < num)
+  {
+    cat("Try a larger number\n")
+  }
+  else if(guess > num)
+  {
+    cat("Try a smaller number\n")
+  }
+}
+
