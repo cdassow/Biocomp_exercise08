@@ -2,7 +2,6 @@
 
 #1. generate a graph from the UW vs. MSU game on 1/22/13
 
-    #generate a dataframe with a cumulative score for each team when they score
 gameData <- read.delim("UWvMSU_1-22-13.txt")
 
     #create a data frame with 3 columns: time (starting at 0), UW scores (blank to fill in later), and MSU scores (blank to fill in later)
@@ -31,36 +30,31 @@ legend("bottomright",legend=(c("UW","MSU")),text.col=c("red","green"))
     #if the guess is correct, computer replies "correct!"
     #the player can guess up to 10 times
 
-
-  guessMyNumber <- function(number){
-    randNum <- ceiling(runif(1, 1, 100))#runif(1,1,100) gives 1 number between 1 through 100, and ceiling rounds the random number to a whole number
-     if(randNum>number){
-      print("higher")
-    }else if(randNum<number){
-      print("lower")
+#setup:
+    
+    #function that displays "higher", "lower", or "correct" after each guess
+  guessMyNumber <- function(num, randNum){
+     if(randNum>num){
+      return("higher")
+    }else if(randNum<num){
+      return("lower")
     }else{
-      print("correct!")
+      return("correct!")
     }
-}
-
+  }
   
-  numguess <- c(1:10)
-  guesses <- data.frame(NumOfGuess=numguess, Guess=numeric(length(numguess)), Answer=numeric(length(numguess)))
-  guesses$Answer[i] <- randNum
-  guesses$Guess[i] <- number
-
-for(i in 1:10){
-  replicate(10, {
-            guessMyNumber <- function(number){
-              randNum <- ceiling(runif(1, 1, 100))#runif(1,1,100) gives 1 number between 1 through 100, and ceiling rounds the random number to a whole number
-              guesses$Answer[1:10] <- randNum
-              guesses$Guess[i] <- number
-              if(guesses$Answer[i]>guesses$Guess[i]){
-                print("higher")
-              }else if(guesses$Answer[i]<guesses$Guess[i]){
-                print("lower")
-              }else{
-                print("correct!")
-              }
-            }})
-}
+  
+#game:
+  
+    #generate 1 random number rounded to an integer between 1 and 100
+    #give user 10 guesses, print response given by the guessMyNumber function
+    #if number is guessed correctly, end the loop
+  randNum <- ceiling(runif(1, 1, 100))
+  for(i in 1:10){
+    num <- as.integer(readline(prompt = "guess a number!"))
+    response <- guessMyNumber(num, randNum)
+    print(response)
+    if(response=="correct!"){
+      break
+    }
+  }
