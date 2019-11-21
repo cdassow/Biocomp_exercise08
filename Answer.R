@@ -2,7 +2,7 @@
 # QUESTION 1
 #################################
 
-# Usage:
+# Usage: just hit command + enter on every line
 
 sports <- read.table(file.choose())
 #select UWvMSU_1-22-13.txt
