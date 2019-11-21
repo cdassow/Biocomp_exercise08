@@ -17,35 +17,35 @@ game[,"quarter"]<-game[,time=cut(time, breaks=c(0,10,20,30,40),labels=c("1st","2
 ggplot() + 
   geom_line(data = scoreUW, aes(x = time, y = points_scoredUW), color = "red") +
   geom_line(data = scoreMSU, aes(x = time, y = points_scoredMSU), color = "green") +
-  xlab('Quarter') +
+  xlab('Time') +
   ylab('Points Scored')+
   theme_classic()
 
 #Guess My Number game
 readinteger <- function()
-{ n <- readline(prompt="Guess here: ")
-  if(!grepl("^[0-9]+$",n))
+{ y <- readline(prompt="Guess here: ")
+  if(!grepl("^[0-9]+$",y))
   {return(readinteger())
   }
-  return(as.integer(n))
+  return(as.integer(y))
 }
 
-num <- round(runif(1) * 100, digits = 0)
-guess <- 1
+x <- round(runif(1) * 100, digits = 0)
+n <- 1
 
 cat("Guess a number between 0 and 100.\n")
-while(guess != num)
+while(n != x)
 { 
-  guess <- readinteger()
-  if (guess == num)
+  n <- readinteger()
+  if (n == x)
   {
-    cat("Congratulations,", num, "is right.\n")
+    cat("Congratulations!", x, "is right.\n")
   }
-  else if (guess < num)
+  else if (n < x)
   {
     cat("Try a larger number\n")
   }
-  else if(guess > num)
+  else if(n > x)
   {
     cat("Try a smaller number\n")
   }
