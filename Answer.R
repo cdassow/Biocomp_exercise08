@@ -6,13 +6,17 @@
 
 sports <- read.table(file.choose())
 #select UWvMSU_1-22-13.txt
-sports_df <- as.data.frame(sports)
 
-sconsin <- sports_df[sports_df[,2] == "UW" ]
-gogreen <- 
+sconsin <- sports[sports$V2 == "UW" ,]
+gogreen <- sports[sports$V2 == "MSU" ,]
+
+badger_cum <- cumsum(as.numeric(sconsin$V3))
+spartan_cum <- cumsum(as.numeric(gogreen$V3))
+badger_time <- as.vector(sconsin$V1)
+spartan_time <- as.vector(gogreen$V1)
   
-plot(sports_df$V1, sconsin$, type = 'l')
-
+plot(badger_time, badger_cum, type = "l", col = "red", xlab = "time", ylab = "score", main = "A Classic B1G Showdown")
+lines(x = spartan_time, y = spartan_cum, col = "green")
 
 #################################
 # QUESTION 2
