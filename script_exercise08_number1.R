@@ -9,7 +9,7 @@ MSUtotal <- 0
 #Create the new dataframes for the results to go into with a column each for time, UW cummulative scores, MSU commulative scores
 x <- c("time","UW.Score","MSU.Score")
 cumulative <- data.frame(matrix(ncol=3,nrow=50))
-colnames(cummulative) <- x
+colnames(cumulative) <- x
 
 #Adds the correct times to the resulting dataframe
 cumulative$time <- gamescore$time
@@ -29,13 +29,10 @@ for(i in 1:50){
 }
 #plotting results, first makes a matrix for each team, then plots them
 UWplot <- cumulative[is.na(cumulative$MSU.Score),1:2]
-UWplot
 columns <- c(1,3)
 MSUplot <- cumulative[is.na(cumulative$UW.Score),columns]
-MSUplot
 
-
-
+#Makes the MSU plot blue, UWplot Black
 plot(UWplot,type="l", main="Cumulative Scores for MSU and UW",ylab="Score")+lines(MSUplot, col="blue")
 
 
