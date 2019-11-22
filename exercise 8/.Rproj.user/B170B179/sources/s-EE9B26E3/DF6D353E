@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574393662129.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1435949400",
+    "id" : "DF6D353E",
+    "lastKnownWriteTime" : 1574395729,
+    "last_content_update" : 1574395729379,
+    "path" : "C:/Users/Owner/Desktop/biocomputing/Biocomp_exercise08/exercise 8/exercise8.R",
+    "project_path" : "exercise8.R",
+    "properties" : {
+        "cursorPosition" : "42,0",
+        "scrollLine" : "18",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
