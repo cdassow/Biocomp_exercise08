@@ -1,0 +1,44 @@
+#question1. 
+scores <- read.table("../UWvMSU_1-22-13.txt", header = TRUE)
+ScoreForUW <- 0
+ScoreForMSU <- 0
+Rows <- nrow(scores)
+scores1 <- data.frame("Time"=rep(0,Rows),"UW"=rep(0,Rows),"MSU"=rep(0,Rows))
+for (x in 1:NumberofRows) {
+  times = scores[x,1]
+  if(scores[x,2]=="UW"){
+    ScoreForUW = ScoreForUW + scores[x,3]
+  }
+  else if(scores[x,2]=="MSU"){
+    ScoreForMSU = ScoreForMSU + scores[x,3]
+  }
+  scores1[x,] <- c(times, ScoreForUW, ScoreForMSU)
+}
+plot(scores1$Time, scores1$MSU, type = "l", xlab = "Time", ylab = "score", col = "green")
+lines(scores1$Time, scores1$UW, col = "red")
+#question2.
+guess <- function(){
+  range <- c(1:100)
+  randomnumber <- sample(range, 1)
+  counter <- 0
+  playerguess <- 0 
+  while(counter<10 & playerguess!=randomnumber){
+    playerguess <- readline(prompt = "guess a number between 1 and 100: ")
+    if(playerguess > randomnumber){
+      print("Lower")
+      counter = counter+1
+    }
+    else if(playerguess < randomnumber){
+      print("higher")
+      counter = counter+1
+    }  
+    else if(playerguess == randomnumber){
+      print("You WIN!")
+    }
+  }
+}
+
+
+
+
+
